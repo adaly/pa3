@@ -15,6 +15,10 @@ public class numpartition
 		
 		// Reads 100 random numbers from input file
 		if (args.length == 1){
+			if (args[0].equals("t")){
+				test();
+				return;
+			}
 			try{
 				FileInputStream fis = new FileInputStream(args[0]);
 				DataInputStream dis = new DataInputStream(fis);
@@ -39,23 +43,51 @@ public class numpartition
 			
 	}
 	
-	public static int karmaker_mark(int[] nums)
+	public static void test()
 	{
+		long[] nums = {19, 6, 13, 9, 17};
+		karmaker_karp(nums,5);
+	}
+	
+	public static long karmaker_karp(long[] nums, int capacity)
+	{
+		PriorityQueue<Long> q = new PriorityQueue<Long>(capacity);
+		int i;
+		
+		for (i=0; i<capacity; i++)
+			q.add(new Long(-1*nums[i]));
+					
+		Long first = q.poll();
+		Long sec;
+		
+		while (first != null){
+			System.out.println(-1*first.longValue());
+			
+			if (q.peek() == null)
+				return first.longValue();
+			sec = q.poll();
+			q.add(new Long(first.longValue() - sec.longValue()));
+			
+			first = q.poll();
+		}
+		
 		return 0;
 	}
 	
 	public static long[] rand100()
 	{
 		Random r = new Random(System.currentTimeMillis());
+		long l = 1000000000;
 		long[] rands = new long[100];
 		
-		for (int i=0; i<100; i++){
-			rands[i] = nextLong(r,1000000000000);
+		for (int i=0; i<100; i++)
+			rands[i] = nextLong(r,l);
 						
 		return rands;
 	}
 	
-	public static long nextLong(Random rng, long n) {
+	public static long nextLong(Random rng, long n) 
+	{
    		// error checking and 2^x checking removed for simplicity.
    		long bits, val;
    		do {
