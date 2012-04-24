@@ -1,8 +1,8 @@
 public interface solution
 {
-	public void randomSolution();
-	public void randomMove();
-	public int cost();
+	public void randomizeSolution();
+	public solution randomMove();
+	public long cost();
 	
 	public void printSolution();
 }

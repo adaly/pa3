@@ -40,13 +40,16 @@ public class numpartition
 		// Generates 100 random numbers
 		else
 			rands = rand100();
-			
 	}
 	
 	public static void test()
 	{
 		long[] nums = {19, 6, 13, 9, 17};
-		karmaker_karp(nums,5);
+		//karmaker_karp(nums,5);
+		solution sol = new binarySolution(nums);
+		sol.printSolution();
+		sol = sol.randomMove();
+		sol.printSolution();
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)
