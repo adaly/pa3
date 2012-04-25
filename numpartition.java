@@ -13,6 +13,9 @@ public class numpartition
 		
 		long[] rands;
 		
+		// Generates 100 random numbers
+		rands = rand100();
+		
 		// Reads 100 random numbers from input file
 		if (args.length == 1){
 			if (args[0].equals("t")){
@@ -37,22 +40,22 @@ public class numpartition
 				System.err.println("Error: "+e.getMessage());
 			}
 		}
-		// Generates 100 random numbers
-		else
-			rands = rand100();
+		
+		for (int i=0; i<100; i++)
+			System.out.println(rands[i]);
 	}
 	
 	public static void test()
 	{
 		long[] nums = {10,8,7,6,5};
 		//karmaker_karp(nums,5);
-		localSearch ls = new localSearch(nums,0);
+		localSearch ls = new localSearch(nums,1);
 		//ls.repeatedRandom(10);
-		//ls.hillClimbing(10);
+		ls.hillClimbing(10);
 		//ls.simulatedAnnealing(10);
 		
-		solution sol = new PrepartitionSolution(nums);
-		sol.printSolution();
+		//solution sol = new PrepartitionSolution(nums);
+		//sol.printSolution();
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)
@@ -67,7 +70,7 @@ public class numpartition
 		Long sec;
 		
 		while (first != null){
-			System.out.println(-1*first.longValue());
+			//System.out.println(-1*first.longValue());
 			
 			if (q.peek() == null)
 				return first.longValue();
@@ -83,7 +86,7 @@ public class numpartition
 	public static long[] rand100()
 	{
 		Random r = new Random(System.nanoTime());
-		long l = 1000000000;
+		long l = (long)1e12;
 		long[] rands = new long[100];
 		
 		for (int i=0; i<100; i++)

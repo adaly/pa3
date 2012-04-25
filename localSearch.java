@@ -23,7 +23,9 @@ public class localSearch
 		
 		if (mode == PREPARTITION)
 		{
-			
+			sol1 = new PrepartitionSolution(sequence);
+			sol2 = new PrepartitionSolution(sequence);
+			sol3 = new PrepartitionSolution(sequence);
 		}
 	}
 	

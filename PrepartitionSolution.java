@@ -34,9 +34,7 @@ public class PrepartitionSolution implements solution
 	public void randomizeSolution()
 	{
 		for (int i = 0; i < sol.length; ++i) {
-			//do { // Make sure it's not zero.
-        		sol[i] = generator.nextInt(sol.length);
-      		//} while (sol[i] == 0);
+        	sol[i] = generator.nextInt(sol.length);
 		}
 	}
 
@@ -50,7 +48,7 @@ public class PrepartitionSolution implements solution
     	do {
       		i = generator.nextInt(sol.length);
 		  	j = generator.nextInt(sol.length);
-    	} while (i == 0 || j == 0 || sol[i] == j);
+    	} while (sol[i] == j);
 
 		PrepartitionSolution neighbor = new PrepartitionSolution(this);
     	neighbor.sol[i] = j;
