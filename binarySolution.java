@@ -39,6 +39,8 @@ public class binarySolution implements solution
 		Random r = new Random(System.currentTimeMillis());
 		int i = r.nextInt(sol.length);
 		int j = r.nextInt(sol.length);
+		while (j == i)
+			j = r.nextInt(sol.length);
 		
 		binarySolution newSol = new binarySolution(this);
 		
@@ -65,7 +67,7 @@ public class binarySolution implements solution
 	public void printSolution()
 	{	
 		for (int i=0; i<sol.length; i++)
-			System.out.println(sol[i]);
+			System.out.printf("%d\t",sol[i]);
 		System.out.printf("Cost: %d\n",cost());
 	}
 }

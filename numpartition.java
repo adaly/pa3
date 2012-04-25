@@ -46,10 +46,8 @@ public class numpartition
 	{
 		long[] nums = {19, 6, 13, 9, 17};
 		//karmaker_karp(nums,5);
-		solution sol = new binarySolution(nums);
-		sol.printSolution();
-		sol = sol.randomMove();
-		sol.printSolution();
+		localSearch ls = new localSearch(nums,0);
+		ls.repeatedRandom(10);
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)

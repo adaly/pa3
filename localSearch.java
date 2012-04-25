@@ -34,12 +34,19 @@ public class localSearch
 		sol1.randomizeSolution();
 		minCost = sol1.cost();
 		
+		//sol1.printSolution();
+		
 		for (i=0; i<maxIter; i++)
 		{
 			sol2.randomizeSolution();
-			if (sol2.cost() < sol1.cost())
+			sol2.printSolution();
+			System.out.printf("\tminCost: %d\n",minCost);
+			
+			if (sol2.cost() < minCost){
 				minCost = sol2.cost();
+			}
 		}
+		System.out.printf("Cost: %d\n",minCost);
 		return minCost;
 	}
 	
