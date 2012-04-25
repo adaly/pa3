@@ -8,7 +8,7 @@ public class PrepartitionSolution implements solution
 
 	public PrepartitionSolution(long[] input)
 	{
-    generator = new Random(System.nanoTime());
+    	generator = new Random(System.nanoTime());
 		sequence = input;
 		sol = new int[input.length];
 		randomizeSolution();
@@ -20,7 +20,7 @@ public class PrepartitionSolution implements solution
 		sol = new int[p.sol.length];
 		for (int i = 0; i < sol.length; ++i) {
 			sol[i] = p.sol[i];
-    }
+    	}
 	}
 
   /**
@@ -31,8 +31,8 @@ public class PrepartitionSolution implements solution
 	{
 		for (int i = 0; i < sol.length; ++i) {
 			do { // Make sure it's not zero.
-        sol[i] = generator.nextInt(sol.length);
-      } while (sol[i] == 0);
+        		sol[i] = generator.nextInt(sol.length);
+      		} while (sol[i] == 0);
 		}
 	}
 
@@ -43,13 +43,13 @@ public class PrepartitionSolution implements solution
 	public solution randomMove()
 	{
 		int i, j;
-    do {
-      i = generator.nextInt(sol.length);
-		  j = generator.nextInt(sol.length);
-    } while (i == 0 || j == 0 || sol[i] == j);
+    	do {
+      		i = generator.nextInt(sol.length);
+		  	j = generator.nextInt(sol.length);
+    	} while (i == 0 || j == 0 || sol[i] == j);
 
 		PrepartitionSolution neighbor = new PrepartitionSolution(this);
-    neighbor.sol[i] = j;
+    	neighbor.sol[i] = j;
 		return neighbor;
 	}
 
@@ -59,8 +59,14 @@ public class PrepartitionSolution implements solution
    */
 	public long cost()
 	{
-		//return Math.abs(numpartition.karmaker_karp(sol, sol.length));
-		return 0;
+		int i;
+		long[] ppseq = new long[sol.length];
+		for (i=0; i<sol.length; i++)
+			ppseq[i] = 0;
+		for (i=0; i<sol.length; i++)
+			ppseq[sol[i]] += sequence[i];
+			
+		return Math.abs(numpartition.karmaker_karp(ppseq, sol.length));
 	}
 
 	public void printSolution()
