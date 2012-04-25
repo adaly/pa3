@@ -10,7 +10,7 @@ public class localSearch
 
 	private long[] sequence;
 	private int mode;
-	private solution sol1, sol2;
+	private solution sol1, sol2, sol3;
 		
 	public localSearch(long[] sequence, int mode)
 	{
@@ -19,6 +19,7 @@ public class localSearch
 		
 		sol1 = new binarySolution(sequence);
 		sol2 = new binarySolution(sequence);
+		sol3 = new binarySolution(sequence);
 		
 		if (mode == PREPARTITION)
 		{
@@ -65,6 +66,37 @@ public class localSearch
 			}
 		}
 		return sol1.cost();
+	}
+	
+	public long simulatedAnnealing(int maxIter)
+	{
+		Random r = new Random(System.nanoTime());
+		int i;
+		sol1.randomizeSolution();
+		sol3 = sol1;
+		
+		for (i=0; i<maxIter; i++)
+		{
+			sol2 = sol1.randomMove();
+			if (sol2.cost() < sol1.cost())
+				sol1 = sol2;
+			else
+			{
+				double p = coolingSchedule(sol1.cost(),sol2.cost(),i);
+				if ((double)(r.nextInt(100000))/100000 > p)
+					sol1 = sol2;
+			}
+			if (sol1.cost() < sol3.cost())
+				sol3 = sol1;
+		}
+		return sol3.cost();
+	}
+	
+	private double coolingSchedule(long r1, long r2, int iter)
+	{
+		double t_iter = Math.pow(10,10)*Math.pow(0.8,Math.floor(iter/300));
+		double exp = -1*(r2-r1)/t_iter;
+		return Math.exp(exp);
 	}
 	
 	

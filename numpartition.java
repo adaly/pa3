@@ -47,7 +47,9 @@ public class numpartition
 		long[] nums = {19, 6, 13, 9, 17};
 		//karmaker_karp(nums,5);
 		localSearch ls = new localSearch(nums,0);
-		ls.hillClimbing(10);
+		//ls.repeatedRandom(10);
+		//ls.hillClimbing(10);
+		ls.simulatedAnnealing(10);
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)
