@@ -44,12 +44,15 @@ public class numpartition
 	
 	public static void test()
 	{
-		long[] nums = {19, 6, 13, 9, 17};
+		long[] nums = {10,8,7,6,5};
 		//karmaker_karp(nums,5);
 		localSearch ls = new localSearch(nums,0);
 		//ls.repeatedRandom(10);
 		//ls.hillClimbing(10);
-		ls.simulatedAnnealing(10);
+		//ls.simulatedAnnealing(10);
+		
+		solution sol = new PrepartitionSolution(nums);
+		sol.printSolution();
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)

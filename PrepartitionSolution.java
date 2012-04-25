@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+import java.math.*;
 import java.util.Random;
 
 public class PrepartitionSolution implements solution
@@ -12,6 +15,7 @@ public class PrepartitionSolution implements solution
 		sequence = input;
 		sol = new int[input.length];
 		randomizeSolution();
+		//sol[0] = 0; sol[1] = 1; sol[2] = 1; sol[3] = 3; sol[4] = 4;
 	}
 
 	public PrepartitionSolution(PrepartitionSolution p)
@@ -30,9 +34,9 @@ public class PrepartitionSolution implements solution
 	public void randomizeSolution()
 	{
 		for (int i = 0; i < sol.length; ++i) {
-			do { // Make sure it's not zero.
+			//do { // Make sure it's not zero.
         		sol[i] = generator.nextInt(sol.length);
-      		} while (sol[i] == 0);
+      		//} while (sol[i] == 0);
 		}
 	}
 
@@ -65,6 +69,11 @@ public class PrepartitionSolution implements solution
 			ppseq[i] = 0;
 		for (i=0; i<sol.length; i++)
 			ppseq[sol[i]] += sequence[i];
+			
+		/*System.out.printf("\nProcessed sequence: ");
+		for (i=0; i<sol.length; i++)
+			System.out.printf("%d\t",ppseq[i]);
+		System.out.println("");*/
 			
 		return Math.abs(numpartition.karmaker_karp(ppseq, sol.length));
 	}
