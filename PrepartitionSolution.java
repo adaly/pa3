@@ -21,6 +21,7 @@ public class PrepartitionSolution implements solution
 	public PrepartitionSolution(PrepartitionSolution p)
 	{
 		sequence = p.sequence;
+		generator = new Random(System.nanoTime());
 		sol = new int[p.sol.length];
 		for (int i = 0; i < sol.length; ++i) {
 			sol[i] = p.sol[i];
