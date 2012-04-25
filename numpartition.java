@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 
 public class numpartition
 {
@@ -51,8 +52,8 @@ public class numpartition
 		//karmaker_karp(nums,5);
 		localSearch ls = new localSearch(nums,1);
 		//ls.repeatedRandom(10);
-		ls.hillClimbing(10);
-		//ls.simulatedAnnealing(10);
+		//ls.hillClimbing(10);
+		ls.simulatedAnnealing(10);
 		
 		//solution sol = new PrepartitionSolution(nums);
 		//sol.printSolution();
@@ -97,13 +98,11 @@ public class numpartition
 	
 	public static long nextLong(Random rng, long n) 
 	{
-   		// error checking and 2^x checking removed for simplicity.
-   		long bits, val;
-   		do {
-      		bits = (rng.nextLong() << 1) >>> 1;
-     		 val = bits % n;
-   		} while (bits-val+(n-1) < 0L);
-   		return val;
+   		byte[] bytes = new byte[8];
+    	rng.nextBytes(bytes);
+    	ByteBuffer b = ByteBuffer.wrap(bytes);
+    	// Scale [Long.MIN_VALUE, Long.MAX_VALUE] -> [1,n]
+    	return (1 + (long)Math.abs((b.getLong() / (double)Long.MAX_VALUE) * (n-1)));
 	}
 
 }
