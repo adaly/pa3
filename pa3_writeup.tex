@@ -9,7 +9,7 @@
 \maketitle
 
 \section{Dynamic Programming Solution to NumPartition}
-If $n$ is the length of the sequence $S$ of numbers and $b$ is the sum of the sequence, define a boolean matrix $M$ such that $M(i,k)$ is true if there exists a non-empty subset of the first $i$ elements of$S$ that sums to $k$.  Store a parallel array $A$ that keeps track of the members of the subset in the corresponding cell of $M$.  Thus, the solution to our original problem would be the subset $A(i,j)$ such that $|j-\frac{b}{2}|$ is minimized and $M(i,j)$ is true.
+If $n$ is the length of the sequence $S$ of numbers and $b$ is the sum of the sequence, define a boolean matrix $M$ such that $M(i,k)$ is true if there exists a non-empty subset of the first $i$ elements of$S$ that sums to $k$.  Store a parallel array $A$ that keeps track of the members of the subset in the corresponding cell of $M$.  Thus, the solution to our original problem would be the subset $A(n,j)$ such that $|j-\frac{b}{2}|$ is minimized and $M(n,j)$ is true.
 
 We can initialize all $M$ and $A$ to $false$ and $\emptyset$, respectively.  Then, for all $1\leq j \leq b$, if $s_1 == j$ set $M(1,j) = true$ and $A(1,j) = s_1$.  Then, for all $2 \leq i \leq n$:
 \begin{equation}
@@ -17,7 +17,7 @@ M(i,j) = M(i-1,j) || M(s_i == j) || M(i-1,j-s_i) \mbox{ for all } 1 \leq j \leq 
 \end{equation}
 Where if the first clause is true, we set $A(i,j) = A(i-1,j)$, if the second clause is true, we set $A(i,j) = \{s_i\}$, and if the third clause is true, we set $A(i,j) = A(i-1,j)+\{s_i\}$.
 
-The tables $M$ and $A$ will be filled in $nb$ time.  Afterwards, minimizing $|j-\frac{b}{2}|$ such that $M(*,j) == true$ takes $nb$ time.  After we find the $(i,j)$ pair that satisfies this, we simply return $A(i,j)$ as the minimum partition and $|b-j|$ as the residue.
+The tables $M$ and $A$ will be filled in $nb$ time.  Afterwards, minimizing $|j-\frac{b}{2}|$ such that $M(n,j) == true$ takes $b$ time.  Thus, the runtime of this DP solution is $O(nb+b) = O(nb)$, which is indeed pseudo-polynomial time.  After we find the $j$ that satisfies this, we simply return $A(n,j)$ as the minimum partition and $|b-j|$ as the residue.
 
 \section{Efficient Implementation of Karmarkar-Karp Algorithm}
 The Karmarkar-Karp algorithm relies on repeatedly removing the two largest elements from the sequence and inserting their difference.  Since this must run for $n$ iterations on a list of size $n$ (iterating through pairs and differencing them), we must make sure that only $log(n)$ work is done at each step.
