@@ -14,9 +14,6 @@ public class numpartition
 		
 		long[] rands;
 		
-		// Generates 100 random numbers
-		rands = rand100();
-		
 		// Reads 100 random numbers from input file
 		if (args.length == 1){
 			if (args[0].equals("t")){
@@ -36,19 +33,69 @@ public class numpartition
 					rands[i] = Long.parseLong(line);
 					i++;
 				}
+				System.out.printf("KK: %d\n",karmarkar_karp(rands,rands.length));
 			}
 			catch (Exception e){
 				System.err.println("Error: "+e.getMessage());
 			}
 		}
 		
-		//for (int i=0; i<100; i++)
-		//	System.out.println(rands[i]);
-		localSearch ls = new localSearch(rands,1);
-		System.out.printf("RR: %d\n",ls.repeatedRandom(25000));
-		System.out.printf("HC: %d\n",ls.hillClimbing(25000));
-		System.out.printf("SA: %d\n",ls.simulatedAnnealing(25000));
-		System.out.printf("KK: %d\n",karmarkar_karp(rands,100));
+		if (args.length == 0)
+		{
+			System.out.printf("KK\tRR(bin)\tRR(pp)\tHC(bin)\tHC(pp)\tSA(bin)\tSA(pp)\t");
+			System.out.printf("KK\tRR(bin)\tRR(pp)\tHC(bin)\tHC(pp)\tSA(bin)\tSA(pp)\n");
+			for (int i=0; i<50; i++)
+			{
+				// Generates 100 random numbers
+				rands = rand100();
+				localSearch ls = new localSearch(rands,0);
+				localSearch ls2 = new localSearch(rands,1);
+				
+				long start = System.nanoTime();
+				long kk = karmarkar_karp(rands,100);
+				long kk_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long rr_b = ls.repeatedRandom(25000);
+				long rr_b_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long rr_p = ls2.repeatedRandom(25000);
+				long rr_p_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long hc_b = ls.hillClimbing(25000);
+				long hc_b_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long hc_p = ls2.hillClimbing(25000);
+				long hc_p_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long sa_b = ls.simulatedAnnealing(25000);
+				long sa_b_t = System.nanoTime()-start;
+				
+				start = System.nanoTime();
+				long sa_p = ls2.simulatedAnnealing(25000);
+				long sa_p_t = System.nanoTime()-start;
+		
+				System.out.printf("%d\t",kk);		
+				System.out.printf("%d\t",rr_b);
+				System.out.printf("%d\t",rr_p);
+				System.out.printf("%d\t",hc_b);
+				System.out.printf("%d\t",hc_p);
+				System.out.printf("%d\t",sa_b);
+				System.out.printf("%d\t",sa_p);
+				
+				System.out.printf("%d\t",kk_t);		
+				System.out.printf("%d\t",rr_b_t);
+				System.out.printf("%d\t",rr_p_t);
+				System.out.printf("%d\t",hc_b_t);
+				System.out.printf("%d\t",hc_p_t);
+				System.out.printf("%d\t",sa_b_t);
+				System.out.printf("%d\n",sa_p_t);
+			}
+		}
 	}
 	
 	public static void test()
