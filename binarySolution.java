@@ -16,13 +16,15 @@ public class binarySolution implements solution
 	
 	public binarySolution(binarySolution b)
 	{
-		sol = b.sol;
+		sol = new int[b.sol.length];
 		sequence = b.sequence;
+		for (int i=0; i<sol.length; i++)
+			sol[i] = b.sol[i];
 	}
 	
 	public void randomizeSolution()
 	{
-		Random r = new Random(System.currentTimeMillis());
+		Random r = new Random(System.nanoTime());
 		int i;
 		
 		for (i=0; i<sol.length; i++)
@@ -36,7 +38,7 @@ public class binarySolution implements solution
 	
 	public solution randomMove()
 	{
-		Random r = new Random(System.currentTimeMillis());
+		Random r = new Random(System.nanoTime());
 		int i = r.nextInt(sol.length);
 		int j = r.nextInt(sol.length);
 		while (j == i)

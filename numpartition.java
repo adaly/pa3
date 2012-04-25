@@ -47,7 +47,7 @@ public class numpartition
 		long[] nums = {19, 6, 13, 9, 17};
 		//karmaker_karp(nums,5);
 		localSearch ls = new localSearch(nums,0);
-		ls.repeatedRandom(10);
+		ls.hillClimbing(10);
 	}
 	
 	public static long karmaker_karp(long[] nums, int capacity)
@@ -77,7 +77,7 @@ public class numpartition
 	
 	public static long[] rand100()
 	{
-		Random r = new Random(System.currentTimeMillis());
+		Random r = new Random(System.nanoTime());
 		long l = 1000000000;
 		long[] rands = new long[100];
 		
