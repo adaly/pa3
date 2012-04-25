@@ -74,7 +74,7 @@ public class PrepartitionSolution implements solution
 			System.out.printf("%d\t",ppseq[i]);
 		System.out.println("");*/
 			
-		return Math.abs(numpartition.karmaker_karp(ppseq, sol.length));
+		return Math.abs(numpartition.karmarkar_karp(ppseq, sol.length));
 	}
 
 	public void printSolution()

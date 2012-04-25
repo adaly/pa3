@@ -42,8 +42,13 @@ public class numpartition
 			}
 		}
 		
-		for (int i=0; i<100; i++)
-			System.out.println(rands[i]);
+		//for (int i=0; i<100; i++)
+		//	System.out.println(rands[i]);
+		localSearch ls = new localSearch(rands,1);
+		System.out.printf("RR: %d\n",ls.repeatedRandom(25000));
+		System.out.printf("HC: %d\n",ls.hillClimbing(25000));
+		System.out.printf("SA: %d\n",ls.simulatedAnnealing(25000));
+		System.out.printf("KK: %d\n",karmarkar_karp(rands,100));
 	}
 	
 	public static void test()
@@ -59,7 +64,7 @@ public class numpartition
 		//sol.printSolution();
 	}
 	
-	public static long karmaker_karp(long[] nums, int capacity)
+	public static long karmarkar_karp(long[] nums, int capacity)
 	{
 		PriorityQueue<Long> q = new PriorityQueue<Long>(capacity);
 		int i;
@@ -74,7 +79,7 @@ public class numpartition
 			//System.out.println(-1*first.longValue());
 			
 			if (q.peek() == null)
-				return first.longValue();
+				return Math.abs(first.longValue());
 			sec = q.poll();
 			q.add(new Long(first.longValue() - sec.longValue()));
 			

@@ -40,14 +40,14 @@ public class localSearch
 		for (i=0; i<maxIter; i++)
 		{
 			sol2.randomizeSolution();
-			sol2.printSolution();
-			System.out.printf("\tminCost: %d\n",minCost);
+			//sol2.printSolution();
+			//System.out.printf("\tminCost: %d\n",minCost);
 			
 			if (sol2.cost() < minCost){
 				minCost = sol2.cost();
 			}
 		}
-		System.out.printf("Cost: %d\n",minCost);
+		//System.out.printf("Cost: %d\n",minCost);
 		return minCost;
 	}
 	
@@ -55,16 +55,16 @@ public class localSearch
 	{
 		int i;
 		sol1.randomizeSolution();
-		sol1.printSolution();
+		//sol1.printSolution();
 		
 		for (i=0; i<maxIter; i++)
 		{
 			sol2 = sol1.randomMove();
-			sol2.printSolution();
+			//sol2.printSolution();
 			
 			if (sol2.cost() < sol1.cost()){
 				sol1 = sol2;
-				System.out.printf("\tminCost: %d\n",sol1.cost());
+				//System.out.printf("\tminCost: %d\n",sol1.cost());
 			}
 		}
 		return sol1.cost();
@@ -81,16 +81,17 @@ public class localSearch
 		{
 			sol2 = sol1.randomMove();
 			
-			sol1.printSolution();
-			sol2.printSolution();
-			sol3.printSolution();
+			//sol1.printSolution();
+			//sol2.printSolution();
+			//sol3.printSolution();
+			//System.out.printf("\tminCost: %d\n",sol3.cost());
 			
 			if (sol2.cost() < sol1.cost())
 				sol1 = sol2;
 			else
 			{
 				double p = coolingSchedule(sol1.cost(),sol2.cost(),i);
-				System.out.println(p);
+				//System.out.println(p);
 				
 				if (r.nextDouble() < p)
 					sol1 = sol2;
