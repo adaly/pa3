@@ -1,0 +1,24 @@
+\documentclass[11pt]{article}
+\title{CS 124 - Programming Assignment 3}
+\author{Aidan Daly, Byron Hood}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\begin{document}
+\maketitle
+
+\section{Dynamic Programming Solution to NumPartition}
+
+\section{Efficient Implementation of Karmarkar-Karp Algorithm}
+The Karmarkar-Karp algorithm relies on repeatedly removing the two largest elements from the sequence and inserting their difference.  Since this must run for $n$ iterations on a list of size $n$ (iterating through pairs and differencing them), we must make sure that only $log(n)$ work is done at each step.
+
+A Priority Queue (or heap) implementation would achieve this.  First, build a priority queue of the elements in the sequence.  We know that constructing a heap of $n$ elements takes $O(n)$ time, so this setup step is linear.  Then, remove the largest two elements from the queue.  This will operate in $2log(n) = O(log(n)$ time.  Finally, insert their difference back into the queue ($O(log(n))$ time), and repeat until there is only one element remaining.  Return the last element. 
+
+Since the setup takes linear time, and each point in the iteration (removing, differencing, inserting) takes $O(log(n))$ time, we have an $O(nlog(n))$ implementation of Karmarkar-Karp with a priority queue.
+
+\section{Results of Local Search Algorithms}
+
+\section{Karmarkar-Karp as starting point for local search algorithms}
+
+\end{document}
